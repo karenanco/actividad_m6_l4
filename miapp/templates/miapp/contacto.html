@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto - Mi Proyecto Django{% endblock %}
+
+{% block content %}
+    <h2>Formulario de Contacto</h2>
+
+    {% if exito %}
+        <div class="alert alerta-exito">
+            ✅ ¡Mensaje enviado correctamente! Gracias por contactarnos.
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'contacto' %}" class="form-contacto">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alerta-error">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="campo">
+            {{ form.nombre.label_tag }}
+            {{ form.nombre }}
+            {% if form.nombre.errors %}
+                <ul class="errores">
+                    {% for error in form.nombre.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div class="campo">
+            {{ form.correo.label_tag }}
+            {{ form.correo }}
+            {% if form.correo.errors %}
+                <ul class="errores">
+                    {% for error in form.correo.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div class="campo">
+            {{ form.mensaje.label_tag }}
+            {{ form.mensaje }}
+            {% if form.mensaje.errors %}
+                <ul class="errores">
+                    {% for error in form.mensaje.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <button type="submit">Enviar mensaje</button>
+    </form>
+{% endblock %}

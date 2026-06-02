@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Proyecto Django{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'miapp/css/estilos.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>Mi Aplicación Django</h1>
+        <nav>
+            <a href="{% url 'contacto' %}">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Proyecto Django</p>
+    </footer>
+
+    <script src="{% static 'miapp/js/script.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
